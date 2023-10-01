@@ -1,1 +1,2 @@
 # AlgorithmsHomework2
+I will write more in this file but for now it is a checklist of things to ensure I have completed before submitting this section of the assignment. Right now I need to add a way for users to select the line they start from, and I need to double check that the in-order traversal is handled correctly. I believe that it is, and a lot of my logic I think is sound for how the tree is constructed, but could definitely use another set of eyes on this. I am exhausted.
