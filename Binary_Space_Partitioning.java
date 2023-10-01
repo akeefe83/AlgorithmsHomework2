@@ -1,4 +1,5 @@
 import java.lang.*;
+import java.util.*;
 
 public class Binary_Space_Partitioning {
 
@@ -153,7 +154,7 @@ public class Binary_Space_Partitioning {
                     n.back = insert(n.back, new Line(l.s, n.value.s));
                     n.front = insert(n.front, new Line(n.value.s, l.e));
                 }
-                else if (n.value.s.y == l.e.y){
+                else if (n.value.e.y == l.s.y){
                     n.back = insert(n.back, new Line(l.s, n.value.e));
                     n.front = insert(n.front, new Line(n.value.e, l.e));
                 }
@@ -163,7 +164,7 @@ public class Binary_Space_Partitioning {
                     n.back = insert(n.back, new Line(l.s, n.value.s));
                     n.front = insert(n.front, new Line(n.value.s, l.e));
                 }
-                else if (n.value.s.x == l.e.x){
+                else if (n.value.e.x == l.s.x){
                     n.back = insert(n.back, new Line(l.s, n.value.e));
                     n.front = insert(n.front, new Line(n.value.e, l.e));
                 }
@@ -191,6 +192,7 @@ public class Binary_Space_Partitioning {
         //being the line after, so on and so forth. I would recommend drawing out a grid to understand how they are plotted out. Currently the insertion method works, to my 
         //best understanding, my only hang up is ensuring users can choose the starting line and that there is a clear output of the in-order traversal of the tree.
         //I guess there isn't a need to graphically output the image, so I was sweating for nothing.
+
         Line a = new Line(new Coordinate(0,10), new Coordinate(15, 10));
         Line b = new Line(new Coordinate(2,0), new Coordinate(2, 10));
         Line c = new Line(new Coordinate(13,0), new Coordinate(13, 10));
@@ -199,10 +201,30 @@ public class Binary_Space_Partitioning {
         Line f = new Line(new Coordinate(6,6), new Coordinate(8, 6));
         Line g = new Line(new Coordinate(6,8), new Coordinate(8, 6));
         Line [] map = {a, b, c, d, e, f, g};
+
+        System.out.println("Please choose which line to start from by typing in its corresponding number. The lines are described by their starting coordinates and ending coordinates.");
+        System.out.println("0: (" + a.s.x + "," + a.s.y + ") (" + a.e.x + "," + a.e.y +")");
+        System.out.println("1: (" + b.s.x + "," + b.s.y + ") (" + b.e.x + "," + b.e.y +")");
+        System.out.println("2: (" + c.s.x + "," + c.s.y + ") (" + c.e.x + "," + c.e.y +")");
+        System.out.println("3: (" + d.s.x + "," + d.s.y + ") (" + d.e.x + "," + d.e.y +")");
+        System.out.println("4: (" + e.s.x + "," + e.s.y + ") (" + e.e.x + "," + e.e.y +")");
+        System.out.println("5: (" + f.s.x + "," + f.s.y + ") (" + f.e.x + "," + f.e.y +")");
+        System.out.println("6: (" + g.s.x + "," + g.s.y + ") (" + g.e.x + "," + g.e.y +")");
+        Scanner scan = new Scanner(System.in);
+        int answer = scan.nextInt();
+
         BSP mapTree = new BSP();
+        Node n = mapTree.head;
+        mapTree.insert(n, map[answer]);
+
         for (int i = 0; i < map.length; i++){
-            Node n = mapTree.head;
-            mapTree.insert(n, map[i]);
+            if (i != answer){
+                n = mapTree.head;
+                mapTree.insert(n, map[i]);
+            }
+            else{
+                continue;
+            }
         }
         mapTree.inOrderTraversal();
     }
